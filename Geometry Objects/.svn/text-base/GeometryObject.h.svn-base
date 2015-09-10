@@ -1,0 +1,69 @@
+#pragma once
+
+#include "Ray.h"
+#include "ShadeRec.h"
+#include "RGBColor.h"
+#include "Normal.h"
+#include "Point3D.h"
+#include "Sampler.h"
+#include "BBox.h"
+
+
+class Material;
+
+class GeometryObject{
+
+public:
+	GeometryObject();
+	virtual ~GeometryObject();
+
+	void set_color(float r, float g, float b);
+
+	Material* get_material()const;
+
+	void	set_material(Material* mat_ptr);
+
+	virtual bool hit(const Ray& r, double& tmin, ShadeRec& sr)const = 0; //这个函数修改了sr  const在构建Instance时被破坏了 无奈使用mutable
+
+	virtual bool shadow_hit(const Ray& ray,float& tmin)const; //使该物体能投射阴影 根据传入的射线，判断是否与本物体相交 
+															  // 传回tmin 以便判断光源是否在在物体之间
+
+	//为使用面光源而增加的函数
+
+	virtual void set_sampler(Sampler* sampler); 
+
+	virtual Point3D sample(void);
+
+	virtual float pdf(const ShadeRec& sr)const;
+
+	virtual Normal get_normal(const Point3D& p);
+
+	//加速求交的函数
+	virtual BBox get_bounding_box()const;
+
+	//三角形网格所需的函数
+	virtual Normal get_normal();
+
+	void set_shadows(bool b);
+
+	bool casts_shadows();
+public:
+	RGBColor		color;
+	mutable Material*		material_ptr;  //在Grid中被破坏
+	bool	shadows;
+	
+
+protected:
+	Sampler*		sampler_ptr;	// for 面光源
+
+};
+
+
+
+
+inline void GeometryObject::set_color(float r, float g, float b)
+{
+	color = RGBColor(r,g,b);
+}
+
+

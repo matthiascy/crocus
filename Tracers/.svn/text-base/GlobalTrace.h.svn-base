@@ -1,0 +1,13 @@
+#pragma once
+
+#include "Tracer.h"
+
+class GlobalTrace:public Tracer
+{
+public:
+	GlobalTrace();
+	GlobalTrace(World* _world_ptr);
+	~GlobalTrace();
+
+	virtual RGBColor trace_ray(Ray ray,int depth)const;
+};

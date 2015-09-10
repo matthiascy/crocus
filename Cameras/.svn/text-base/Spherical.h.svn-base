@@ -1,0 +1,26 @@
+#pragma once
+
+//球面全景相机
+
+#include "Camera.h"
+#include "Vector3D.h"
+#include "Point2D.h"
+
+class Spherical:public Camera
+{
+public:
+	Spherical();	
+	virtual ~Spherical();
+
+	virtual void render_scene(const World &world);
+
+	void set_horizontal_fov(float fov);
+
+	void set_vertical_fov(float fov);
+
+	Vector3D ray_direction(const Point2D& pp,const int hres,const int vres, const float s)const;
+
+private:
+	float psi_max;   // 负责垂直视野  -90 —— 90
+	float lambda_max; //负责水平视野 -180-——180
+};

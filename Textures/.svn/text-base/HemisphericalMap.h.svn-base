@@ -1,0 +1,29 @@
+#pragma once
+
+#include "Constants.h"
+#include "Mapping.h"
+
+class HemisphericalMap: public Mapping {		
+	public:
+	
+		HemisphericalMap(void);									
+		
+		HemisphericalMap(const HemisphericalMap& sm);					
+
+		HemisphericalMap& 											
+		operator= (const HemisphericalMap& rhs);		
+
+		virtual HemisphericalMap*									
+		clone(void) const;				
+
+		~HemisphericalMap(void);									
+		
+		virtual void
+		get_texel_coordinates(	const 	Point3D& 	local_hit_point, 
+								const 	int 		xres, 
+								const 	int 		yres, 
+										int& 		row, 
+										int& 		column) const; //需要保证输入的交点是在单位半球面上 ，本函数不处理其他情况
+};
+
+		

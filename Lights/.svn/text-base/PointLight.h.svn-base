@@ -1,0 +1,21 @@
+#pragma once
+
+#include "Light.h"
+
+class PointLight:public Light
+{
+public:
+	PointLight();
+	~PointLight();
+
+	virtual Vector3D get_direction(const ShadeRec& sr); //得到到该点的入射光方向
+
+	virtual RGBColor L(const ShadeRec& sr); //得到该点的入射光光能 没有使用距离衰减
+
+	void set_location(double x,double y, double z);
+
+	virtual bool in_shadow(const Ray& ray,const ShadeRec& sr)const;
+
+private:
+	Point3D		location;
+};

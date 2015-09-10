@@ -1,0 +1,150 @@
+#include "Sampler.h"
+#include <algorithm>
+#include "maths.h"
+#include <cmath>
+
+
+Sampler::Sampler()
+:num_samples(1),num_sets(83),count(0),jump(0)
+{
+	samples.reserve(num_samples * num_sets);
+	setup_shuffled_indices();
+
+}
+
+Sampler::Sampler(const int num)
+:num_samples(num),num_sets(83),count(0),jump(0)
+{
+	samples.reserve(num_samples * num_sets);
+	setup_shuffled_indices();
+}
+
+Sampler::Sampler(const int num,const int nsets)
+:num_samples(num),num_sets(nsets),count(0),jump(0)
+{
+	samples.reserve(num_samples * num_sets);
+	setup_shuffled_indices();
+}
+
+
+Sampler::~Sampler()
+{
+}
+
+//���ܣ�����shuffled_indices
+void Sampler::setup_shuffled_indices(void)
+{
+	shuffled_indices.reserve(num_samples * num_sets);
+	vector<int> indices;
+
+	for(int j = 0; j < num_samples; j++)
+		indices.push_back(j);
+
+	for(int p = 0; p < num_sets; p++)
+	{
+		random_shuffle(indices.begin(),indices.end());
+
+		for(int j = 0 ;j < num_samples; j++)
+		{
+			shuffled_indices.push_back(indices[j]);
+		}
+	}
+}
+
+
+void Sampler::map_samples_to_unit_disk()
+{
+	int size = samples.size();
+	float r, phi;
+	Point2D	sp;
+
+	disk_samples.reserve(size);
+
+	for(int j = 0; j < size; j++)
+	{
+		sp.x = 2.0 * samples[j].x - 1.0;
+		sp.y = 2.0 * samples[j].y - 1.0;
+
+		if(sp.x > -sp.y)
+		{
+			if(sp.x > sp.y)
+			{
+				r = sp.x;
+				phi = sp.y / sp.x;
+			}
+			else
+			{
+				r = sp.y;
+				phi = 2 - sp.x / sp.y;
+			}
+		}
+		else
+		{
+			if(sp.x < sp.y)
+			{
+				r = - sp.x;
+				phi = 4 + sp.y / sp.x;
+			}
+			else
+			{
+				r = -sp.y;
+				if(sp.y != 0.0)
+					phi = 6 - sp.x/sp.y;
+				else
+					phi = 0.0;
+			}
+		}
+		phi *= PI / 4.0;
+
+		disk_samples[j].x = r * cos(phi);
+		disk_samples[j].y = r * sin(phi);
+	}
+	samples.erase(samples.begin(), samples.end());
+}
+
+
+void Sampler::map_samples_to_hemisphere(const float exp) {
+	int size = samples.size();
+	hemisphere_samples.reserve(num_samples * num_sets);
+		
+	for (int j = 0; j < size; j++) {
+		float cos_phi = cos(2.0 * PI * samples[j].x);
+		float sin_phi = sin(2.0 * PI * samples[j].x);	
+		float cos_theta = pow((1.0 - samples[j].y), 1.0 / (exp + 1.0));
+		float sin_theta = sqrt (1.0 - cos_theta * cos_theta);
+		float pu = sin_theta * cos_phi;
+		float pv = sin_theta * sin_phi;
+		float pw = cos_theta;
+		hemisphere_samples.push_back(Point3D(pu, pv, pw)); 
+	}
+}
+
+
+
+
+Point2D Sampler::sample_unit_square()
+{
+	if(count % num_samples == 0)
+	{
+		jump = (rand_int() % num_sets) * num_samples;
+	}
+
+	return (samples[jump + shuffled_indices[jump + count++ % num_samples]]);//shuffled_indices�е������� 0��N�� ���ǰ��Ҫ��jump
+}
+
+Point2D Sampler::sample_unit_disk()
+{
+	if(count % num_samples == 0)
+	{
+		jump = (rand_int() % num_sets) * num_samples;
+	}
+
+	return (disk_samples[jump + shuffled_indices[jump + count++ % num_samples]]);//shuffled_indices�е������� 0��N�� ���ǰ��Ҫ��jump
+}
+
+Point3D Sampler::sample_hemisphere(void) {
+	if (count % num_samples == 0)  									// start of a new pixel
+		jump = (rand_int() % num_sets) * num_samples;
+		
+	return (hemisphere_samples[jump + shuffled_indices[jump + count++ % num_samples]]);		
+}

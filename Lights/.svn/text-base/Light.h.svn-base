@@ -1,0 +1,43 @@
+#pragma once
+
+#include "ShadeRec.h"
+#include "RGBColor.h"
+#include "Vector3D.h"
+#include "Ray.h"
+
+class Light
+{
+public:
+	Light();
+	~Light();
+
+	//virtual Vector3D get_direction(const ShadeRec& sr)const;
+
+	virtual Vector3D get_direction(const ShadeRec& sr); //有副作用的版本
+
+	//virtual RGBColor L(const ShadeRec& sr)const;
+
+	virtual RGBColor L(const ShadeRec& sr); //有副作用的版本
+
+	virtual bool in_shadow(const Ray& ray,const ShadeRec& sr)const; //判断由sr决定的交点是否在该光源所产生的阴影中
+
+	virtual void set_color(float r,float g,float b);
+
+	virtual void scale_radiance(const float b);
+
+
+  //针对面光源新加的函数
+	virtual float G(const ShadeRec& sr)const; //渲染方程 面片形式的 G（）因子的一部分
+
+	virtual float pdf(const ShadeRec& sr)const; //返回面光源上该采样点的概率密度，即出现的几率
+
+
+	void set_shadows(bool b);
+
+	bool casts_shadows();
+
+protected:
+	bool	shadows;
+	float	ls;
+	RGBColor	color;
+};

@@ -1,0 +1,114 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Chinese (P.R.C.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+#pragma code_page(936)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+#endif    // Chinese (P.R.C.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// PPM
+//
+
+IDR_PPM1                PPM                     "TextureFiles\\ppm\\penguin_eye.ppm"
+IDR_PPM2                PPM                     "TextureFiles\\ppm\\sandstone_ramp1.ppm"
+IDR_PPM3                PPM                     "TextureFiles\\ppm\\sandstone_ramp2.ppm"
+IDR_PPM4                PPM                     "TextureFiles\\ppm\\sandstone_ramp3.ppm"
+IDR_PPM5                PPM                     "TextureFiles\\ppm\\sandstone_ramp4.ppm"
+IDR_PPM6                PPM                     "TextureFiles\\ppm\\Sarah.ppm"
+IDR_PPM7                PPM                     "TextureFiles\\ppm\\SphereGrid.ppm"
+IDR_PPM8                PPM                     "TextureFiles\\ppm\\turquoise_ramp.ppm"
+IDR_PPM9                PPM                     "TextureFiles\\ppm\\TurquoiseAndBrownRamp.ppm"
+IDR_PPM10               PPM                     "TextureFiles\\ppm\\uffizi_probe_large.ppm"
+IDR_PPM11               PPM                     "TextureFiles\\ppm\\uffizi_probe_small.ppm"
+IDR_PPM12               PPM                     "TextureFiles\\ppm\\BilliardBall.ppm"
+IDR_PPM13               PPM                     "TextureFiles\\ppm\\BlueAndBuffRamp.ppm"
+IDR_PPM14               PPM                     "TextureFiles\\ppm\\BlueGlass.ppm"
+IDR_PPM15               PPM                     "TextureFiles\\ppm\\BlueMarbleRamp.ppm"
+IDR_PPM16               PPM                     "TextureFiles\\ppm\\BrownRamp.ppm"
+IDR_PPM17               PPM                     "TextureFiles\\ppm\\CloudsHighRes.ppm"
+IDR_PPM18               PPM                     "TextureFiles\\ppm\\CloudsHighResWithBlack.ppm"
+IDR_PPM19               PPM                     "TextureFiles\\ppm\\CloudsLowRes.ppm"
+IDR_PPM20               PPM                     "TextureFiles\\ppm\\CloudsLowResWithBlack.ppm"
+IDR_PPM21               PPM                     "TextureFiles\\ppm\\CountryScene.ppm"
+IDR_PPM22               PPM                     "TextureFiles\\ppm\\CyanToYellow.ppm"
+IDR_PPM23               PPM                     "TextureFiles\\ppm\\EarthHighRes.ppm"
+IDR_PPM24               PPM                     "TextureFiles\\ppm\\EarthLowRes.ppm"
+IDR_PPM25               PPM                     "TextureFiles\\ppm\\EarthMap.ppm"
+IDR_PPM26               PPM                     "TextureFiles\\ppm\\EarthWithClouds.ppm"
+IDR_PPM27               PPM                     "TextureFiles\\ppm\\EveningSky.ppm"
+IDR_PPM28               PPM                     "TextureFiles\\ppm\\GrayMarbleRamp.ppm"
+IDR_PPM29               PPM                     "TextureFiles\\ppm\\GreenAndYellow.ppm"
+IDR_PPM30               PPM                     "TextureFiles\\ppm\\label.ppm"
+IDR_PPM31               PPM                     "TextureFiles\\ppm\\Lightlace.ppm"
+IDR_PPM32               PPM                     "TextureFiles\\ppm\\MorningSky.ppm"
+IDR_PPM33               PPM                     "TextureFiles\\ppm\\penguin_body.ppm"
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

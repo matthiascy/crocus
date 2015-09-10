@@ -1,0 +1,299 @@
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/16/trunk/Rytracer/Geometry%20Objects
+END
+Disk.h
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/11/trunk/Rytracer/Geometry%20Objects/Disk.h
+END
+SmoothTriangle.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/15/trunk/Rytracer/Geometry%20Objects/SmoothTriangle.cpp
+END
+ConvexCylinder.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/14/trunk/Rytracer/Geometry%20Objects/ConvexCylinder.h
+END
+GlassOfWater.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/14/trunk/Rytracer/Geometry%20Objects/GlassOfWater.cpp
+END
+Plane.h
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/6/trunk/Rytracer/Geometry%20Objects/Plane.h
+END
+Triangle.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/15/trunk/Rytracer/Geometry%20Objects/Triangle.cpp
+END
+SolidCylinder.h
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/10/trunk/Rytracer/Geometry%20Objects/SolidCylinder.h
+END
+Instance.h
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/11/trunk/Rytracer/Geometry%20Objects/Instance.h
+END
+Rectangle.h
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/13/trunk/Rytracer/Geometry%20Objects/Rectangle.h
+END
+Torus.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/6/trunk/Rytracer/Geometry%20Objects/Torus.cpp
+END
+SmoothMeshTriangle.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/15/trunk/Rytracer/Geometry%20Objects/SmoothMeshTriangle.cpp
+END
+ConcaveCylinder.h
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/14/trunk/Rytracer/Geometry%20Objects/ConcaveCylinder.h
+END
+MeshTriangle.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/12/trunk/Rytracer/Geometry%20Objects/MeshTriangle.cpp
+END
+Compound.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/15/trunk/Rytracer/Geometry%20Objects/Compound.cpp
+END
+Annulus.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/15/trunk/Rytracer/Geometry%20Objects/Annulus.cpp
+END
+GeometryObject.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/16/trunk/Rytracer/Geometry%20Objects/GeometryObject.h
+END
+ConcaveSphere.h
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/13/trunk/Rytracer/Geometry%20Objects/ConcaveSphere.h
+END
+Disk.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/15/trunk/Rytracer/Geometry%20Objects/Disk.cpp
+END
+Grid.h
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/12/trunk/Rytracer/Geometry%20Objects/Grid.h
+END
+Sphere.h
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/13/trunk/Rytracer/Geometry%20Objects/Sphere.h
+END
+ConvexCylinder.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/15/trunk/Rytracer/Geometry%20Objects/ConvexCylinder.cpp
+END
+ConcaveHemisphere.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/16/trunk/Rytracer/Geometry%20Objects/ConcaveHemisphere.h
+END
+Box.h
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/11/trunk/Rytracer/Geometry%20Objects/Box.h
+END
+FlatMeshTriangle.h
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/12/trunk/Rytracer/Geometry%20Objects/FlatMeshTriangle.h
+END
+Plane.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/15/trunk/Rytracer/Geometry%20Objects/Plane.cpp
+END
+BBox.h
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/11/trunk/Rytracer/Geometry%20Objects/BBox.h
+END
+OpenCylinder.h
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/10/trunk/Rytracer/Geometry%20Objects/OpenCylinder.h
+END
+Mesh.h
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/12/trunk/Rytracer/Geometry%20Objects/Mesh.h
+END
+Rectangle.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/15/trunk/Rytracer/Geometry%20Objects/Rectangle.cpp
+END
+Instance.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/13/trunk/Rytracer/Geometry%20Objects/Instance.cpp
+END
+SolidCylinder.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/10/trunk/Rytracer/Geometry%20Objects/SolidCylinder.cpp
+END
+SmoothTriangle.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/12/trunk/Rytracer/Geometry%20Objects/SmoothTriangle.h
+END
+GlassOfWater.h
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/14/trunk/Rytracer/Geometry%20Objects/GlassOfWater.h
+END
+ConcaveCylinder.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/15/trunk/Rytracer/Geometry%20Objects/ConcaveCylinder.cpp
+END
+Triangle.h
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/12/trunk/Rytracer/Geometry%20Objects/Triangle.h
+END
+Torus.h
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/6/trunk/Rytracer/Geometry%20Objects/Torus.h
+END
+SmoothMeshTriangle.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/12/trunk/Rytracer/Geometry%20Objects/SmoothMeshTriangle.h
+END
+GeometryObject.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/16/trunk/Rytracer/Geometry%20Objects/GeometryObject.cpp
+END
+Grid.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/12/trunk/Rytracer/Geometry%20Objects/Grid.cpp
+END
+ConcaveSphere.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/15/trunk/Rytracer/Geometry%20Objects/ConcaveSphere.cpp
+END
+Sphere.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/15/trunk/Rytracer/Geometry%20Objects/Sphere.cpp
+END
+MeshTriangle.h
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/12/trunk/Rytracer/Geometry%20Objects/MeshTriangle.h
+END
+Box.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/15/trunk/Rytracer/Geometry%20Objects/Box.cpp
+END
+ConcaveHemisphere.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/16/trunk/Rytracer/Geometry%20Objects/ConcaveHemisphere.cpp
+END
+FlatMeshTriangle.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/15/trunk/Rytracer/Geometry%20Objects/FlatMeshTriangle.cpp
+END
+Compound.h
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/14/trunk/Rytracer/Geometry%20Objects/Compound.h
+END
+BBox.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/11/trunk/Rytracer/Geometry%20Objects/BBox.cpp
+END
+Annulus.h
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/14/trunk/Rytracer/Geometry%20Objects/Annulus.h
+END
+OpenCylinder.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/15/trunk/Rytracer/Geometry%20Objects/OpenCylinder.cpp
+END

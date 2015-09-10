@@ -1,0 +1,77 @@
+K 25
+svn:wc:ra_dav:version-url
+V 39
+/svn/!svn/ver/14/trunk/Rytracer/Tracers
+END
+AreaLighting.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/13/trunk/Rytracer/Tracers/AreaLighting.cpp
+END
+GlobalTrace.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/13/trunk/Rytracer/Tracers/GlobalTrace.cpp
+END
+Tracer.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/14/trunk/Rytracer/Tracers/Tracer.cpp
+END
+PathTrace.h
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/13/trunk/Rytracer/Tracers/PathTrace.h
+END
+AreaLighting.h
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/13/trunk/Rytracer/Tracers/AreaLighting.h
+END
+GlobalTrace.h
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/13/trunk/Rytracer/Tracers/GlobalTrace.h
+END
+Tracer.h
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/14/trunk/Rytracer/Tracers/Tracer.h
+END
+RayCast.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/13/trunk/Rytracer/Tracers/RayCast.cpp
+END
+Whitted.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/14/trunk/Rytracer/Tracers/Whitted.cpp
+END
+RayCast.h
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/13/trunk/Rytracer/Tracers/RayCast.h
+END
+PathTrace.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/13/trunk/Rytracer/Tracers/PathTrace.cpp
+END
+Whitted.h
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/14/trunk/Rytracer/Tracers/Whitted.h
+END

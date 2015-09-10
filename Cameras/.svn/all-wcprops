@@ -1,0 +1,77 @@
+K 25
+svn:wc:ra_dav:version-url
+V 39
+/svn/!svn/ver/14/trunk/Rytracer/Cameras
+END
+Pinhole.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/17/trunk/Rytracer/Cameras/Pinhole.cpp
+END
+Spherical.h
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/17/trunk/Rytracer/Cameras/Spherical.h
+END
+StereoCamera.h
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/17/trunk/Rytracer/Cameras/StereoCamera.h
+END
+FishEye.h
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/17/trunk/Rytracer/Cameras/FishEye.h
+END
+Pinhole.h
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/17/trunk/Rytracer/Cameras/Pinhole.h
+END
+ThinLens.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/17/trunk/Rytracer/Cameras/ThinLens.cpp
+END
+Camera.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/17/trunk/Rytracer/Cameras/Camera.cpp
+END
+ThinLens.h
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/6/trunk/Rytracer/Cameras/ThinLens.h
+END
+Spherical.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/17/trunk/Rytracer/Cameras/Spherical.cpp
+END
+StereoCamera.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/17/trunk/Rytracer/Cameras/StereoCamera.cpp
+END
+FishEye.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/17/trunk/Rytracer/Cameras/FishEye.cpp
+END
+Camera.h
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/17/trunk/Rytracer/Cameras/Camera.h
+END

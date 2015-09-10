@@ -1,0 +1,62 @@
+#pragma once
+
+#include <vector>
+#include "constants.h"
+#include "Camera.h"
+#include "GeometryObject.h"
+#include "ShadeRec.h"
+#include "Ray.h"
+#include "Tracer.h"
+#include "ViewPlane.h"
+#include "Light.h"
+#include "Ambient.h"
+
+
+using namespace std;
+
+
+class RenderThread;
+
+
+class World{
+public:
+
+	World();
+	~World();
+	
+	void build();
+
+	void open_window(int hres,int vres)const;
+
+	void set_camera(Camera* c_ptr);
+
+	void set_tracer(Tracer*	t_ptr);
+
+	void set_ambient_light(Light*	light_ptr);
+
+	ShadeRec hit_objects(Ray& ray);
+
+	void add_object(GeometryObject* object_ptr);
+
+	void add_light(Light*  light_ptr);
+
+	void display_pixel(const int row,const int col,RGBColor L)const; //与界面的接口函数
+
+	RGBColor max_to_one(const RGBColor& c)const;
+
+private:
+	void delete_objects();
+	void delete_lights();
+
+
+public:
+	vector<GeometryObject*>		objects;
+	vector<Light*>		lights;
+	Light*		ambient_ptr;
+	Camera*		camera_ptr;
+	Tracer*		tracer_ptr;
+	ViewPlane	vp;
+	RenderThread*	thread;
+	RGBColor		background_color;
+};
+

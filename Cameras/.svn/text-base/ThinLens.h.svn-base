@@ -1,0 +1,27 @@
+#pragma once
+
+#include "Camera.h"
+#include "Sampler.h"
+#include "Vector3D.h"
+#include "Point2D.h"
+
+class ThinLens : public Camera
+{
+public:
+	ThinLens(void);
+	~ThinLens();
+
+	void set_sampler(Sampler* sp);
+
+	Vector3D ray_direction(const Point2D& pixel_point, const Point2D& lens_point)const;
+
+	virtual void render_scene(World& w);
+
+private:
+	float		lens_radius;
+	float		d;
+	float		f;
+	float		zoom;
+	Sampler*	sampler_ptr;
+
+};

@@ -1,0 +1,54 @@
+#include "Plane.h"
+#include "Point3D.h"
+#include "Ray.h"
+#include "ShadeRec.h"
+
+const double Plane::kEpsilon = 0.001;
+
+Plane::Plane()
+:GeometryObject(),point(),normal()
+{
+
+}
+
+Plane::Plane(const Point3D& p, const Normal &n)
+:GeometryObject(),point(p),normal(n)
+{
+	
+}
+
+Plane::~Plane()
+{}
+
+bool Plane::hit(const Ray &ray, double &tmin, ShadeRec &sr) const
+{
+	double t = (point - ray.o) * normal / (ray.d * normal);
+
+	if( t > kEpsilon )
+	{
+		tmin = t;
+		sr.color = color;
+		sr.normal = normal;
+		sr.local_hit_point = ray.o + t * ray.d;
+		
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+
+}
+
+bool Plane::shadow_hit(const Ray &ray, float &tmin) const
+{
+	double t = (point - ray.o) * normal / (ray.d * normal);
+
+	if(t > kEpsilon)
+	{
+		tmin = t; 
+		return true;
+	}
+	else
+		return (false);
+}

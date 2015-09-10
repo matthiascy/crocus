@@ -1,0 +1,125 @@
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/16/trunk/Rytracer/Textures
+END
+SquareMap.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/15/trunk/Rytracer/Textures/SquareMap.cpp
+END
+LightProbe.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/17/trunk/Rytracer/Textures/LightProbe.cpp
+END
+CylindricalMap.h
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/16/trunk/Rytracer/Textures/CylindricalMap.h
+END
+Texture.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/15/trunk/Rytracer/Textures/Texture.cpp
+END
+Mapping.h
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/16/trunk/Rytracer/Textures/Mapping.h
+END
+Checker3D.h
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/15/trunk/Rytracer/Textures/Checker3D.h
+END
+SquareMap.h
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/15/trunk/Rytracer/Textures/SquareMap.h
+END
+ImageTexture.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/15/trunk/Rytracer/Textures/ImageTexture.cpp
+END
+LightProbe.h
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/17/trunk/Rytracer/Textures/LightProbe.h
+END
+Texture.h
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/15/trunk/Rytracer/Textures/Texture.h
+END
+SphericalMap.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/15/trunk/Rytracer/Textures/SphericalMap.cpp
+END
+ImageTexture.h
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/15/trunk/Rytracer/Textures/ImageTexture.h
+END
+HemisphericalMap.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/16/trunk/Rytracer/Textures/HemisphericalMap.cpp
+END
+SphericalMap.h
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/15/trunk/Rytracer/Textures/SphericalMap.h
+END
+HemisphericalMap.h
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/16/trunk/Rytracer/Textures/HemisphericalMap.h
+END
+PlaneChecker.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/17/trunk/Rytracer/Textures/PlaneChecker.cpp
+END
+PlaneChecker.h
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/17/trunk/Rytracer/Textures/PlaneChecker.h
+END
+CylindricalMap.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/16/trunk/Rytracer/Textures/CylindricalMap.cpp
+END
+Mapping.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/15/trunk/Rytracer/Textures/Mapping.cpp
+END
+Checker3D.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/15/trunk/Rytracer/Textures/Checker3D.cpp
+END

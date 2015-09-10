@@ -1,0 +1,56 @@
+#pragma once
+
+#include <stdlib.h>
+#include <cmath>
+#include "constants.h"
+
+
+
+void set_rand_seed(const unsigned int seed);
+
+int rand_int(void);
+
+float rand_float(void);
+
+float 						// for multi-jittered sampling
+rand_float(int l, float h);	
+
+int							// for multi-jittered sampling
+rand_int(int l, int h);   
+
+float clamp(float x, float min, float max);
+
+
+
+inline void set_rand_seed(const unsigned int seed)
+{
+	srand(seed);
+}
+
+inline int rand_int(void)
+{
+	return rand();
+}
+
+inline float rand_float(void)
+{
+	return ( (float)rand_int() * invRAND_MAX);
+}
+
+
+inline float 
+rand_float(int l, float h) {
+	return (rand_float() * (h - l) + l);
+}
+
+// ---------------------------------------------------- rand_int with arguments
+
+inline int
+rand_int(int l, int h) {
+	return ((int) (rand_float(0, h - l + 1) + l));
+}
+
+inline float clamp(float x, float min, float max)
+{
+	return (x < min ? min :( x > max ? max:x));
+}

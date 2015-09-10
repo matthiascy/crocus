@@ -1,0 +1,48 @@
+#pragma once
+
+#include <vector>
+#include "Point2D.h"
+#include "Point3D.h"
+
+
+using namespace std;
+
+class Sampler
+{
+public:
+	Sampler(void);
+
+	Sampler(const int num);
+
+	Sampler(const int num,const int nsets);
+
+	virtual ~Sampler(void);
+
+	virtual void generate_samples(void) = 0;
+
+	void setup_shuffled_indices(void);
+
+
+	void map_samples_to_unit_disk(void);
+
+	void map_samples_to_hemisphere(const float p);
+
+
+
+
+	Point2D sample_unit_square(void);
+
+	Point2D sample_unit_disk();
+
+	Point3D	sample_hemisphere();
+
+protected:
+	int	num_samples;
+	int num_sets;
+	vector<Point2D>	samples;
+	vector<Point2D>	disk_samples;
+	vector<Point3D> hemisphere_samples;
+	vector<int>shuffled_indices;
+	unsigned long count;
+	int jump;
+};

@@ -1,0 +1,840 @@
+#include "Grid.h"
+#include "Constants.h"
+#include "Maths.h"
+
+#include "MeshTriangle.h"
+#include "FlatMeshTriangle.h"
+#include "SmoothMeshTriangle.h"
+
+#include "Triangle.h"
+#include "SmoothTriangle.h"
+
+#include "rply.h"
+//#include "ply.h"
+
+typedef enum {
+	flat, 
+	smooth
+} TriangleType;
+
+
+Grid::Grid()
+:Compound(),bbox(),nx(0),ny(0),nz(0),mesh_ptr(new Mesh),reverse_normal(false)
+{}
+
+
+Grid::Grid(Mesh* _mesh_ptr)	
+	: 	Compound(),
+		nx(0),
+		ny(0),
+		nz(0),
+		mesh_ptr(_mesh_ptr),
+		reverse_normal(false)
+{
+	// The cells array will be empty
+}
+
+
+
+Grid::~Grid()
+{}
+
+Point3D Grid::find_min_bounds()
+{
+	BBox bbox;
+	Point3D p0(kHugeValue,kHugeValue,kHugeValue);
+
+	int num_objects = objects.size();
+
+	for(int j = 0; j < num_objects; j++)
+	{
+		bbox = objects[j]->get_bounding_box();
+
+		if(bbox.x0 < p0.x)
+			p0.x = bbox.x0;
+		if(bbox.y0 < p0.y)
+			p0.y = bbox.y0;
+		if(bbox.z0 < p0.z)
+			p0.z = bbox.z0;
+	}
+	p0.x -= kEpsilon; p0.y -= kEpsilon; p0.z -= kEpsilon;
+
+	return p0;
+}
+
+Point3D Grid::find_max_bounds()
+{
+	BBox bbox;
+	Point3D p1(-kHugeValue,-kHugeValue,-kHugeValue);
+
+
+	int num_objects = objects.size();
+
+	for(int j = 0; j < num_objects; j++)
+	{
+		bbox = objects[j]->get_bounding_box();
+
+		if(bbox.x1 > p1.x)
+			p1.x = bbox.x1;
+		if(bbox.y1 > p1.y)
+			p1.y = bbox.y1;
+		if(bbox.z1 > p1.z)
+			p1.z = bbox.z1;
+	}
+	p1.x += kEpsilon; p1.y += kEpsilon; p1.z += kEpsilon;
+
+	return p1;
+}
+
+BBox Grid::get_bounding_box()
+{
+	return bbox;
+}
+
+
+void Grid::setup_cells()
+{
+	// find the minimum and maximum coordinates of the grid
+	
+	Point3D p0 = find_min_bounds();
+	Point3D p1 = find_max_bounds();
+	
+	bbox.x0 = p0.x;
+	bbox.y0 = p0.y;
+	bbox.z0 = p0.z;
+	bbox.x1 = p1.x;
+	bbox.y1 = p1.y;
+	bbox.z1 = p1.z;
+		
+	// compute the number of grid cells in the x, y, and z directions
+	
+	int num_objects = objects.size();
+	
+	// dimensions of the grid in the x, y, and z directions
+	
+	double wx = p1.x - p0.x;
+	double wy = p1.y - p0.y;
+	double wz = p1.z - p0.z;  
+	
+	double multiplier = 2.0;  	// multiplyer scales the number of grid cells relative to the number of objects
+								
+	double s = pow(wx * wy * wz / num_objects, 0.3333333);    
+	nx = multiplier * wx / s + 1;
+	ny = multiplier * wy / s + 1;
+	nz = multiplier * wz / s + 1;
+
+	// set up the array of grid cells with null pointers
+	
+	int num_cells = nx * ny * nz;	
+	cells.reserve(num_objects);
+	
+	for (int j = 0; j < num_cells; j++)
+		cells.push_back(NULL);
+				
+	// set up a temporary array to hold the number of objects stored in each cell
+	
+	vector<int> counts;
+	counts.reserve(num_cells);
+		
+	for (int j = 0; j < num_cells; j++)
+		counts.push_back(0);
+		
+
+	// put the objects into the cells
+	 
+	BBox obj_bBox; 	// object's bounding box
+	int index;  	// cell's array index
+			
+	for (int j = 0; j < num_objects; j++) 
+	{
+		obj_bBox =  objects[j]->get_bounding_box();
+				
+		// compute the cell indices at the corners of the bounding box of the object
+		
+		int ixmin = clamp((obj_bBox.x0 - p0.x) * nx / (p1.x - p0.x), 0, nx - 1);
+		int iymin = clamp((obj_bBox.y0 - p0.y) * ny / (p1.y - p0.y), 0, ny - 1);
+		int izmin = clamp((obj_bBox.z0 - p0.z) * nz / (p1.z - p0.z), 0, nz - 1);
+		int ixmax = clamp((obj_bBox.x1 - p0.x) * nx / (p1.x - p0.x), 0, nx - 1);
+		int iymax = clamp((obj_bBox.y1 - p0.y) * ny / (p1.y - p0.y), 0, ny - 1);
+		int izmax = clamp((obj_bBox.z1 - p0.z) * nz / (p1.z - p0.z), 0, nz - 1);
+				
+		// add the object to the cells
+				
+		for (int iz = izmin; iz <= izmax; iz++) 					// cells in z direction
+			for (int iy = iymin; iy <= iymax; iy++)					// cells in y direction
+				for (int ix = ixmin; ix <= ixmax; ix++) 
+				{			// cells in x direction
+					index = ix + nx * iy + nx * ny * iz;
+															
+					if (counts[index] == 0) 
+					{
+						cells[index] = objects[j];
+						counts[index] += 1;  						// now = 1
+					}
+					else 
+					{
+						if (counts[index] == 1)
+						{
+							Compound* compound_ptr = new Compound;	// construct a compound object
+							compound_ptr->add_object(cells[index]); // add object already in cell
+							compound_ptr->add_object(objects[j]);  	// add the new object
+							cells[index] = compound_ptr;			// store compound in current cell
+							counts[index] += 1;  					// now = 2
+						}						
+						else 
+						{										// counts[index] > 1
+							((Compound*)cells[index])->add_object(objects[j]);	// just add current object
+							counts[index] += 1;						// for statistics only
+						}
+					}
+				}	
+	}  // end of for (int j = 0; j < num_objects; j++)
+	
+	
+	// erase the Compound::vector that stores the object pointers, but don't delete the objects
+	
+	objects.erase (objects.begin(), objects.end());
+
+	
+	// erase the temporary counts vector
+	
+	counts.erase (counts.begin(), counts.end());  
+}
+
+
+bool Grid::hit(const Ray &ray, double &tmin, ShadeRec &sr) const
+{
+	double ox = ray.o.x;
+	double oy = ray.o.y;
+	double oz = ray.o.z;
+	double dx = ray.d.x;
+	double dy = ray.d.y;
+	double dz = ray.d.z;
+
+	double x0 = bbox.x0;
+	double y0 = bbox.y0;
+	double z0 = bbox.z0;
+	double x1 = bbox.x1;
+	double y1 = bbox.y1;
+	double z1 = bbox.z1;
+	
+	double tx_min, ty_min, tz_min;
+	double tx_max, ty_max, tz_max; 
+	
+	// the following code includes modifications from Shirley and Morley (2003)
+	
+	double a = 1.0 / dx;
+	if (a >= 0) 
+	{
+		tx_min = (x0 - ox) * a;
+		tx_max = (x1 - ox) * a;
+	}
+	else 
+	{
+		tx_min = (x1 - ox) * a;
+		tx_max = (x0 - ox) * a;
+	}
+	
+	double b = 1.0 / dy;
+	if (b >= 0) 
+	{
+		ty_min = (y0 - oy) * b;
+		ty_max = (y1 - oy) * b;
+	}
+	else
+	{
+		ty_min = (y1 - oy) * b;
+		ty_max = (y0 - oy) * b;
+	}
+	
+	double c = 1.0 / dz;
+	if (c >= 0) 
+	{
+		tz_min = (z0 - oz) * c;
+		tz_max = (z1 - oz) * c;
+	}
+	else 
+	{
+		tz_min = (z1 - oz) * c;
+		tz_max = (z0 - oz) * c;
+	}
+	
+	double t0, t1;
+	
+	if (tx_min > ty_min)
+		t0 = tx_min;
+	else
+		t0 = ty_min;
+		
+	if (tz_min > t0)
+		t0 = tz_min;
+		
+	if (tx_max < ty_max)
+		t1 = tx_max;
+	else
+		t1 = ty_max;
+		
+	if (tz_max < t1)
+		t1 = tz_max;
+			
+	if (t0 > t1)
+		return(false);
+	
+			
+	// initial cell coordinates
+	
+	int ix, iy, iz;
+	
+	if (bbox.inside(ray.o))
+	{  			
+		// does the ray start inside the grid?
+		ix = clamp((ox - x0) * nx / (x1 - x0), 0, nx - 1);
+		iy = clamp((oy - y0) * ny / (y1 - y0), 0, ny - 1);
+		iz = clamp((oz - z0) * nz / (z1 - z0), 0, nz - 1);
+	}
+	else 
+	{
+		Point3D p = ray.o + t0 * ray.d; 
+		// initial hit point with grid's bounding box
+		ix = clamp((p.x - x0) * nx / (x1 - x0), 0, nx - 1);
+		iy = clamp((p.y - y0) * ny / (y1 - y0), 0, ny - 1);
+		iz = clamp((p.z - z0) * nz / (z1 - z0), 0, nz - 1);
+	}
+	
+	// ray parameter increments per cell in the x, y, and z directions
+	
+	double dtx = (tx_max - tx_min) / nx;
+	double dty = (ty_max - ty_min) / ny;
+	double dtz = (tz_max - tz_min) / nz;
+		
+	double 	tx_next, ty_next, tz_next;
+	int 	ix_step, iy_step, iz_step;
+	int 	ix_stop, iy_stop, iz_stop;
+	
+	if (dx > 0) 
+	{
+		tx_next = tx_min + (ix + 1) * dtx;
+		ix_step = +1;
+		ix_stop = nx;
+}	
+	else 
+	{
+		tx_next = tx_min + (nx - ix) * dtx;
+		ix_step = -1;
+		ix_stop = -1;
+	}
+	
+	if (dx == 0.0) 
+	{
+		tx_next = kHugeValue;
+		ix_step = -1;
+		ix_stop = -1;
+	}
+	
+	
+	if (dy > 0) 
+	{
+		ty_next = ty_min + (iy + 1) * dty;
+		iy_step = +1;
+		iy_stop = ny;
+	}
+	else 
+	{
+		ty_next = ty_min + (ny - iy) * dty;
+		iy_step = -1;
+		iy_stop = -1;
+	}
+	
+	if (dy == 0.0)
+	{
+		ty_next = kHugeValue;
+		iy_step = -1;
+		iy_stop = -1;
+	}
+		
+	if (dz > 0) 
+	{
+		tz_next = tz_min + (iz + 1) * dtz;
+		iz_step = +1;
+		iz_stop = nz;
+	}
+	else 
+	{
+		tz_next = tz_min + (nz - iz) * dtz;
+		iz_step = -1;
+		iz_stop = -1;
+	}
+	
+	if (dz == 0.0) 
+	{
+		tz_next = kHugeValue;
+		iz_step = -1;
+		iz_stop = -1;
+	}
+	
+		
+	// traverse the grid
+	
+	while (true)
+	{	
+		GeometryObject* object_ptr = cells[ix + nx * iy + nx * ny * iz];
+		
+		if (tx_next < ty_next && tx_next < tz_next) 
+		{
+			if (object_ptr && object_ptr->hit(ray, tmin, sr) && tmin < tx_next) 
+			{
+
+				if(object_ptr->get_material())
+					material_ptr = object_ptr->get_material();
+				return (true);
+			}
+			
+			tx_next += dtx;
+			ix += ix_step;
+						
+			if (ix == ix_stop)
+				return (false);
+		} 
+		else
+		{ 	
+			if (ty_next < tz_next) 
+			{
+				if (object_ptr && object_ptr->hit(ray, tmin, sr) && tmin < ty_next) 
+				{
+					if(object_ptr->get_material())
+						material_ptr = object_ptr->get_material();
+					return (true);
+				}
+				
+				ty_next += dty;
+				iy += iy_step;
+								
+				if (iy == iy_stop)
+					return (false);
+		 	}
+		 	else 
+			{		
+				if (object_ptr && object_ptr->hit(ray, tmin, sr) && tmin < tz_next) 
+				{
+					if(object_ptr->get_material())
+						material_ptr = object_ptr->get_material();
+					return (true);
+				}
+				
+				tz_next += dtz;
+				iz += iz_step;
+								
+				if (iz == iz_stop)
+					return (false);
+		 	}
+		}
+	}
+}
+
+bool Grid::shadow_hit(const Ray &ray, float &tmin) const
+{
+	double ox = ray.o.x;
+	double oy = ray.o.y;
+	double oz = ray.o.z;
+	double dx = ray.d.x;
+	double dy = ray.d.y;
+	double dz = ray.d.z;
+
+	double x0 = bbox.x0;
+	double y0 = bbox.y0;
+	double z0 = bbox.z0;
+	double x1 = bbox.x1;
+	double y1 = bbox.y1;
+	double z1 = bbox.z1;
+	
+	double tx_min, ty_min, tz_min;
+	double tx_max, ty_max, tz_max; 
+	
+	// the following code includes modifications from Shirley and Morley (2003)
+	
+	double a = 1.0 / dx;
+	if (a >= 0)
+	{
+		tx_min = (x0 - ox) * a;
+		tx_max = (x1 - ox) * a;
+	}
+	else 
+	{
+		tx_min = (x1 - ox) * a;
+		tx_max = (x0 - ox) * a;
+	}
+	
+	double b = 1.0 / dy;
+	if (b >= 0) 
+	{
+		ty_min = (y0 - oy) * b;
+		ty_max = (y1 - oy) * b;
+	}
+	else {
+		ty_min = (y1 - oy) * b;
+		ty_max = (y0 - oy) * b;
+	}
+	
+	double c = 1.0 / dz;
+	if (c >= 0)
+	{
+		tz_min = (z0 - oz) * c;
+		tz_max = (z1 - oz) * c;
+	}
+	else 
+	{
+		tz_min = (z1 - oz) * c;
+		tz_max = (z0 - oz) * c;
+	}
+	
+	double t0, t1;
+	
+	if (tx_min > ty_min)
+		t0 = tx_min;
+	else
+		t0 = ty_min;
+		
+	if (tz_min > t0)
+		t0 = tz_min;
+		
+	if (tx_max < ty_max)
+		t1 = tx_max;
+	else
+		t1 = ty_max;
+		
+	if (tz_max < t1)
+		t1 = tz_max;
+			
+	if (t0 > t1)
+		return(false);
+	
+			
+	// initial cell coordinates
+	
+	int ix, iy, iz;
+	
+	if (bbox.inside(ray.o))
+	{  			// does the ray start inside the grid?
+		ix = clamp((ox - x0) * nx / (x1 - x0), 0, nx - 1);
+		iy = clamp((oy - y0) * ny / (y1 - y0), 0, ny - 1);
+		iz = clamp((oz - z0) * nz / (z1 - z0), 0, nz - 1);
+	}
+	else 
+	{
+		Point3D p = ray.o + t0 * ray.d;  // initial hit point with grid's bounding box
+		ix = clamp((p.x - x0) * nx / (x1 - x0), 0, nx - 1);
+		iy = clamp((p.y - y0) * ny / (y1 - y0), 0, ny - 1);
+		iz = clamp((p.z - z0) * nz / (z1 - z0), 0, nz - 1);
+	}
+	
+	// ray parameter increments per cell in the x, y, and z directions
+	
+	double dtx = (tx_max - tx_min) / nx;
+	double dty = (ty_max - ty_min) / ny;
+	double dtz = (tz_max - tz_min) / nz;
+		
+	double 	tx_next, ty_next, tz_next;
+	int 	ix_step, iy_step, iz_step;
+	int 	ix_stop, iy_stop, iz_stop;
+	
+	if (dx > 0) 
+	{
+		tx_next = tx_min + (ix + 1) * dtx;
+		ix_step = +1;
+		ix_stop = nx;
+}	
+	else 
+	{
+		tx_next = tx_min + (nx - ix) * dtx;
+		ix_step = -1;
+		ix_stop = -1;
+	}
+	
+	if (dx == 0.0) 
+	{
+		tx_next = kHugeValue;
+		ix_step = -1;
+		ix_stop = -1;
+	}
+	
+	
+	if (dy > 0)
+	{
+		ty_next = ty_min + (iy + 1) * dty;
+		iy_step = +1;
+		iy_stop = ny;
+	}
+	else 
+	{
+		ty_next = ty_min + (ny - iy) * dty;
+		iy_step = -1;
+		iy_stop = -1;
+	}
+	
+	if (dy == 0.0)
+	{
+		ty_next = kHugeValue;
+		iy_step = -1;
+		iy_stop = -1;
+	}
+		
+	if (dz > 0)
+	{
+		tz_next = tz_min + (iz + 1) * dtz;
+		iz_step = +1;
+		iz_stop = nz;
+	}
+	else 
+	{
+		tz_next = tz_min + (nz - iz) * dtz;
+		iz_step = -1;
+		iz_stop = -1;
+	}
+	
+	if (dz == 0.0) 
+	{
+		tz_next = kHugeValue;
+		iz_step = -1;
+		iz_stop = -1;
+	}
+	
+		
+	// traverse the grid
+	
+	while (true)
+	{	
+		GeometryObject* object_ptr = cells[ix + nx * iy + nx * ny * iz];
+		
+		if (tx_next < ty_next && tx_next < tz_next) 
+		{
+			if (object_ptr && object_ptr->shadow_hit(ray, tmin) && tmin < tx_next) 
+			{
+				return (true);
+			}
+			
+			tx_next += dtx;
+			ix += ix_step;
+						
+			if (ix == ix_stop)
+				return (false);
+		} 
+		else 
+		{ 	
+			if (ty_next < tz_next) 
+			{
+				if (object_ptr && object_ptr->shadow_hit(ray, tmin) && tmin < ty_next) 
+				{
+					return (true);
+				}
+				
+				ty_next += dty;
+				iy += iy_step;
+								
+				if (iy == iy_stop)
+					return (false);
+		 	}
+		 	else 
+			{		
+				if (object_ptr && object_ptr->shadow_hit(ray, tmin) && tmin < tz_next) 
+				{
+					return (true);
+				}
+				
+				tz_next += dtz;
+				iz += iz_step;
+								
+				if (iz == iz_stop)
+					return (false);
+		 	}
+		}
+	}
+}
+
+
+
+// ----------------------------------------------------------------------------- read_flat_triangles
+
+void Grid::read_flat_triangles(char* file_name) 
+{
+  	read_ply_file( file_name, flat);
+ }
+
+
+// ----------------------------------------------------------------------------- read_smooth_triangles
+
+void Grid::read_smooth_triangles(char* file_name) 
+{
+  	read_ply_file(file_name, smooth);
+  	compute_mesh_normals();
+}
+
+
+double a[3];
+int i = 0;
+
+typedef struct Face
+{
+int a;
+int b;
+int c;}Face;
+
+static int vertex_cb(p_ply_argument argument)
+{
+    long eol;
+	Mesh* ptr;
+	static double a[3];
+
+    ply_get_argument_user_data(argument,(void**)&ptr, &eol); 
+	a[eol] = ply_get_argument_value(argument);
+
+	if(eol == 2)
+		ptr->vertices.push_back(Point3D(a[0],a[1],a[2]));
+    return 1;
+}
+
+static int face_cb(p_ply_argument argument)
+{
+    long length, value_index;
+	static long count = -1;
+
+	Face** ptr;
+
+	ply_get_argument_user_data(argument,(void**)&ptr, NULL);
+
+    ply_get_argument_property(argument, NULL, &length, &value_index);
+    switch (value_index)
+	{
+        case 0:
+			(*ptr)[count].a = ply_get_argument_value(argument);
+			break;
+        case 1: 
+            (*ptr)[count].b = ply_get_argument_value(argument);
+            break;
+        case 2:
+            (*ptr)[count].c = ply_get_argument_value(argument);
+            break;
+        default:
+			count++;
+            break;
+    }
+    return 1;
+}
+	
+
+void Grid::read_ply_file(char* file_name, const int triangle_type)
+{
+
+
+	
+		long nvertices, ntriangles;
+		p_ply ply = ply_open(file_name, NULL);
+		if (!ply) return;
+		if (!ply_read_header(ply)) return;
+		nvertices = ply_set_read_cb(ply, "vertex", "x", vertex_cb, mesh_ptr, 0);
+		ply_set_read_cb(ply, "vertex", "y", vertex_cb, mesh_ptr, 1);
+		ply_set_read_cb(ply, "vertex", "z", vertex_cb, mesh_ptr, 2);
+
+		Face* faces;
+		ntriangles = ply_set_read_cb(ply, "face", "vertex_indices", face_cb, &faces, 0);
+
+		faces = new Face[ntriangles];
+		
+		
+		mesh_ptr->num_vertices = nvertices;
+		mesh_ptr->vertices.reserve(nvertices);
+
+
+		mesh_ptr->num_triangles = ntriangles;
+		objects.reserve(ntriangles); 
+
+
+
+		if (!ply_read(ply)) return ;
+		// reserve mesh elements
+
+
+		// the following code stores the face numbers that are shared by each vertex
+
+		mesh_ptr->vertex_faces.reserve(mesh_ptr->num_vertices);
+		
+		vector<int> faceList;
+		for (int j = 0; j < mesh_ptr->num_vertices; j++) 
+		{
+			
+			mesh_ptr->vertex_faces.push_back(faceList); // store empty lists so that we can use the [] notation below
+		}
+
+		
+		int count = 0; // the number of faces read
+
+		for (int j = 0; j < ntriangles; j++) 
+		{
+			// grab an element from the file 
+
+			
+			// construct a mesh triangle of the specified type
+
+			if (triangle_type == flat) 
+			{
+				FlatMeshTriangle* triangle_ptr = new FlatMeshTriangle(mesh_ptr, faces[count].a, faces[count].b, faces[count].c);
+				triangle_ptr->compute_normal(reverse_normal);		
+				objects.push_back(triangle_ptr); 
+			} 
+
+			if (triangle_type == smooth) 
+			{
+				SmoothMeshTriangle* triangle_ptr = new SmoothMeshTriangle(mesh_ptr, faces[count].a, faces[count].b, faces[count].c);
+				triangle_ptr->compute_normal(reverse_normal); 	// the "flat triangle" normal is used to compute the average normal at each mesh vertex
+				objects.push_back(triangle_ptr); 				// it's quicker to do it once here, than have to do it on average 6 times in compute_mesh_normals
+
+				// the following code stores a list of all faces that share a vertex
+				// it's used for computing the average normal at each vertex in order(num_vertices) time
+
+				mesh_ptr->vertex_faces[faces[count].a].push_back(count);//count 代表当前是第几个三角形
+				mesh_ptr->vertex_faces[faces[count].b].push_back(count);
+				mesh_ptr->vertex_faces[faces[count].c].push_back(count);
+				
+			}
+			count++;
+		}
+
+			if (triangle_type == flat)
+			{
+				mesh_ptr->vertex_faces.erase(mesh_ptr->vertex_faces.begin(), mesh_ptr->vertex_faces.end());
+			}
+
+	delete [] faces;
+	ply_close(ply);
+}
+
+void Grid::compute_mesh_normals(void)
+{
+	mesh_ptr->normals.reserve(mesh_ptr->num_vertices);
+	
+	for (int index = 0; index < mesh_ptr->num_vertices; index++)
+	{   // for each vertex
+		Normal normal;    // is zero at this point	
+			
+		for (int j = 0; j < mesh_ptr->vertex_faces[index].size(); j++)
+			normal += objects[mesh_ptr->vertex_faces[index][j]]->get_normal();  
+	
+		// The following code attempts to avoid (nan, nan, nan) normalised normals when all components = 0
+		
+		if (normal.x == 0.0 && normal.y == 0.0 && normal.z == 0.0)
+			normal.y = 1.0;
+		else 
+			normal.normalize();     
+		
+		mesh_ptr->normals.push_back(normal);
+	}
+	
+	// erase the vertex_faces arrays because we have now finished with them
+	
+	for (int index = 0; index < mesh_ptr->num_vertices; index++)
+		for (int j = 0; j < mesh_ptr->vertex_faces[index].size(); j++)
+			mesh_ptr->vertex_faces[index].erase (mesh_ptr->vertex_faces[index].begin(), mesh_ptr->vertex_faces[index].end());
+	
+	mesh_ptr->vertex_faces.erase (mesh_ptr->vertex_faces.begin(), mesh_ptr->vertex_faces.end());
+
+	//cout << "finished constructing normals" << endl;
+}

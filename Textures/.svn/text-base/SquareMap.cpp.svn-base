@@ -1,0 +1,58 @@
+#include "SquareMap.h"
+
+// ---------------------------------------------------------------- default constructor
+
+SquareMap::SquareMap(void) {}
+
+
+// ---------------------------------------------------------------- copy constructor
+
+SquareMap::SquareMap(const SquareMap& sm) {}
+	
+	
+// ---------------------------------------------------------------- assignment operator
+
+SquareMap& 
+SquareMap::operator= (const SquareMap& rhs) {
+	if (this == &rhs)
+		return (*this);
+
+	return (*this);
+}
+
+
+// ---------------------------------------------------------------- destructor
+
+SquareMap::~SquareMap (void) {} 
+
+
+// ---------------------------------------------------------------- clone
+
+SquareMap*								
+SquareMap::clone(void) const {
+	return (new SquareMap(*this));
+}	
+
+
+// ---------------------------------------------------------------- get_texel_coordinates
+
+// Given a hit point on a generic sphere, and the image resolution, this function 
+// returns the texel coordinates in the image
+
+void
+SquareMap::get_texel_coordinates(	const 	Point3D& 	local_hit_point, 
+										const 	int 		xres, 
+										const 	int 		yres, 
+												int& 		row, 
+												int& 		column) const {
+	
+
+		
+	float u = (local_hit_point.z + 1.) / 2.;  //因为是初始(generic)矩形，所以X和Z都在[-1,1]中 
+	float v = (local_hit_point.x + 1.) / 2.;           
+			
+	// finally, map u and v to the texel coordinates
+		
+	column 	= (int) ((xres - 1) * u);   	// column is across
+	row 	= (int)  ((yres - 1) * v);    	// row is up
+}

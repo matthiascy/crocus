@@ -1,0 +1,40 @@
+#pragma once
+
+
+
+#include "GeometryObject.h"
+#include "Matrix.h"
+
+class Instance:public GeometryObject
+{
+public:
+	Instance(void);
+	Instance(GeometryObject* obj_ptr);
+	~Instance(void);
+
+
+	void translate(const float dx, const float dy, const float dz);
+
+	void rotate_x(const float angle);
+
+	void rotate_y(const float angle);
+
+	void rotate_z(const float angle);
+
+	void scale(const float a, const float b, const float c);
+
+	virtual bool hit(const Ray& ray, double& tmin, ShadeRec& sr)const;
+
+	virtual bool shadow_hit(const Ray& ray,float& tmin)const;
+
+	virtual BBox get_bounding_box()const;
+
+	void compute_bounding_box();
+
+private:
+	GeometryObject*		object_ptr;
+	Matrix				inv_matrix;
+
+	BBox				bbox;
+	static 	Matrix		forward_matrix;
+};

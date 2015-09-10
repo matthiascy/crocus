@@ -1,0 +1,88 @@
+/********************************************************************************
+** Form generated from reading ui file 'rytracer.ui'
+**
+** Created: Thu Apr 23 14:14:51 2009
+**      by: Qt User Interface Compiler version 4.5.0
+**
+** WARNING! All changes made in this file will be lost when recompiling ui file!
+********************************************************************************/
+
+#ifndef UI_RYTRACER_H
+#define UI_RYTRACER_H
+
+#include <QtCore/QVariant>
+#include <QtGui/QAction>
+#include <QtGui/QApplication>
+#include <QtGui/QButtonGroup>
+#include <QtGui/QHeaderView>
+#include <QtGui/QMainWindow>
+#include <QtGui/QMenu>
+#include <QtGui/QMenuBar>
+#include <QtGui/QStatusBar>
+#include <QtGui/QToolBar>
+#include <QtGui/QWidget>
+
+QT_BEGIN_NAMESPACE
+
+class Ui_RytracerClass
+{
+public:
+    QAction *action;
+    QWidget *centralWidget;
+    QMenuBar *menuBar;
+    QMenu *menu;
+    QMenu *menu_2;
+    QToolBar *mainToolBar;
+    QStatusBar *statusBar;
+
+    void setupUi(QMainWindow *RytracerClass)
+    {
+        if (RytracerClass->objectName().isEmpty())
+            RytracerClass->setObjectName(QString::fromUtf8("RytracerClass"));
+        RytracerClass->resize(600, 400);
+        action = new QAction(RytracerClass);
+        action->setObjectName(QString::fromUtf8("action"));
+        centralWidget = new QWidget(RytracerClass);
+        centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
+        RytracerClass->setCentralWidget(centralWidget);
+        menuBar = new QMenuBar(RytracerClass);
+        menuBar->setObjectName(QString::fromUtf8("menuBar"));
+        menuBar->setGeometry(QRect(0, 0, 600, 20));
+        menu = new QMenu(menuBar);
+        menu->setObjectName(QString::fromUtf8("menu"));
+        menu_2 = new QMenu(menuBar);
+        menu_2->setObjectName(QString::fromUtf8("menu_2"));
+        RytracerClass->setMenuBar(menuBar);
+        mainToolBar = new QToolBar(RytracerClass);
+        mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));
+        RytracerClass->addToolBar(Qt::TopToolBarArea, mainToolBar);
+        statusBar = new QStatusBar(RytracerClass);
+        statusBar->setObjectName(QString::fromUtf8("statusBar"));
+        RytracerClass->setStatusBar(statusBar);
+
+        menuBar->addAction(menu->menuAction());
+        menuBar->addAction(menu_2->menuAction());
+        menu_2->addAction(action);
+
+        retranslateUi(RytracerClass);
+
+        QMetaObject::connectSlotsByName(RytracerClass);
+    } // setupUi
+
+    void retranslateUi(QMainWindow *RytracerClass)
+    {
+        RytracerClass->setWindowTitle(QApplication::translate("RytracerClass", "Rytracer", 0, QApplication::UnicodeUTF8));
+        action->setText(QApplication::translate("RytracerClass", "\345\274\200\345\247\213", 0, QApplication::UnicodeUTF8));
+        menu->setTitle(QApplication::translate("RytracerClass", "\346\226\207\344\273\266", 0, QApplication::UnicodeUTF8));
+        menu_2->setTitle(QApplication::translate("RytracerClass", "\346\270\262\346\237\223", 0, QApplication::UnicodeUTF8));
+    } // retranslateUi
+
+};
+
+namespace Ui {
+    class RytracerClass: public Ui_RytracerClass {};
+} // namespace Ui
+
+QT_END_NAMESPACE
+
+#endif // UI_RYTRACER_H

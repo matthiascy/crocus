@@ -1,0 +1,132 @@
+#include "Phong.h"
+#include "World.h"
+
+
+Phong::Phong()
+:Material(),ambient_brdf(new Lambertian), diffuse_brdf(new Lambertian),specular_brdf(new GlossySpecular)
+{}
+
+Phong::~Phong()
+{
+	if(ambient_brdf)
+	{
+		delete ambient_brdf;
+		ambient_brdf = NULL;
+	}
+	if(diffuse_brdf)
+	{
+		delete diffuse_brdf;
+		diffuse_brdf = NULL;
+	}
+
+	if(specular_brdf)
+	{
+		delete specular_brdf;
+		specular_brdf = NULL;
+	}
+}
+
+void Phong::set_ka(const float ka)
+{
+	ambient_brdf->set_kd(ka);
+}
+
+void Phong::set_kd(const float kd)
+{
+	diffuse_brdf->set_kd(kd);
+}
+
+void Phong::set_ks(const float ks)
+{
+	specular_brdf->set_ks(ks);
+}
+
+void Phong::set_cd(float r, float g, float b)
+{
+	ambient_brdf->set_cd(r,g,b);
+	diffuse_brdf->set_cd(r,g,b);
+	specular_brdf->set_cs(r,g,b);
+}
+
+void Phong::set_cd(float a)
+{
+	ambient_brdf->set_cd(a,a,a);
+	diffuse_brdf->set_cd(a,a,a);
+	specular_brdf->set_cs(a,a,a);
+}
+
+void Phong::set_cd(const RGBColor& c)
+{
+	ambient_brdf->set_cd(c);
+	diffuse_brdf->set_cd(c);
+	specular_brdf->set_cs(c);
+}
+
+void Phong::set_cs(float r, float g, float b)
+{
+	specular_brdf->set_cs(r,g,b);
+}
+
+void Phong::set_exp(const float e)
+{
+	specular_brdf->set_exp(e);
+}
+
+RGBColor Phong::shade(ShadeRec &sr) const
+{
+	Vector3D wo = -sr.ray.d;
+	RGBColor L = ambient_brdf->rho(sr,wo) * sr.w.ambient_ptr->L(sr);
+
+	int num_lights = sr.w.lights.size();
+
+	for(int i = 0; i < num_lights; i++)
+	{
+		Vector3D wi = sr.w.lights[i]->get_direction(sr);
+		float ndotwi = sr.normal * wi;
+		if(ndotwi > 0.0)
+		{
+			bool in_shadow = false;
+
+			if(sr.w.lights[i]->casts_shadows())
+			{
+				Ray shadowRay(sr.hit_point,wi);
+				in_shadow = sr.w.lights[i]->in_shadow(shadowRay,sr);
+			}
+
+			if(!in_shadow)
+				L += (diffuse_brdf->f(sr,wo,wi) + specular_brdf->f(sr,wo,wi)) * sr.w.lights[i]->L(sr) * ndotwi;
+		}
+	}
+
+	return L;
+}
+
+RGBColor Phong::area_light_shade(ShadeRec&	sr)const
+{
+	Vector3D wo = -sr.ray.d;
+	RGBColor L = ambient_brdf->rho(sr,wo) * sr.w.ambient_ptr->L(sr);
+
+	int num_lights = sr.w.lights.size();
+
+	for(int i = 0; i < num_lights; i++ )
+	{
+		Vector3D wi = sr.w.lights[i]->get_direction(sr);
+		float ndotwi = sr.normal * wi;
+
+		if( ndotwi > 0.0 )
+		{
+			bool in_shadow = false;
+
+			if(sr.w.lights[i]->casts_shadows())
+			{
+				Ray shadow_ray(sr.hit_point,wi);
+				in_shadow = sr.w.lights[i]->in_shadow(shadow_ray,sr);
+			}
+			if(!in_shadow)
+			{
+				L += (diffuse_brdf->f(sr,wo,wi) + specular_brdf->f(sr,wo,wi)) * sr.w.lights[i]->L(sr) * sr.w.lights[i]->G(sr) * ndotwi / sr.w.lights[i]->pdf(sr); //和shade()函数就这一步不同，使用了MC采样
+			}
+		}
+	}
+	return L;
+}

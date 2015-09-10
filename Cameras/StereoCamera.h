@@ -1,0 +1,45 @@
+#ifndef __STEREO_CAMERA__
+#define __STEREO_CAMERA____
+
+#include "Camera.h"
+
+typedef enum
+{
+parallel,
+transverse
+}ViewingType;
+
+class StereoCamera:public Camera
+{
+public:
+
+	StereoCamera();
+
+	~StereoCamera();
+
+	void setup_cameras();
+
+	virtual void render_scene(const World& world);
+
+	void set_pixel_gap(int g);
+
+	void set_stereo_angle(float a);
+
+	void set_left_camera(Camera* c);
+
+	void set_right_camera(Camera* c);
+
+	void use_parallel_viewing();
+
+	void use_transverse_viewing();
+
+private:
+
+	ViewingType viewing;
+	int pixel_gap;
+	float beta;
+	Camera*	left_camera_ptr;
+	Camera*	right_camera_ptr;
+};
+
+#endif

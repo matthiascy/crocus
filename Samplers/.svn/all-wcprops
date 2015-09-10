@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 39
+/svn/!svn/ver/6/trunk/Rytracer/Samplers
+END
+Jittered.h
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/6/trunk/Rytracer/Samplers/Jittered.h
+END
+Regular.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/6/trunk/Rytracer/Samplers/Regular.cpp
+END
+Sampler.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/5/trunk/Rytracer/Samplers/Sampler.cpp
+END
+MultiJittered.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/6/trunk/Rytracer/Samplers/MultiJittered.cpp
+END
+Regular.h
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/6/trunk/Rytracer/Samplers/Regular.h
+END
+Sampler.h
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/6/trunk/Rytracer/Samplers/Sampler.h
+END
+Jittered.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/6/trunk/Rytracer/Samplers/Jittered.cpp
+END
+MultiJittered.h
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/6/trunk/Rytracer/Samplers/MultiJittered.h
+END

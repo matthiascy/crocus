@@ -1,0 +1,40 @@
+#include "Camera.h"
+
+
+Camera::Camera(void)
+:eye(0,0,600),lookat(0,0,0),up(0,1,0),
+u(1,0,0),v(0,1,0),w(0,0,1)
+{
+}
+
+Camera::~Camera(void)
+{
+}
+
+
+void Camera::render_stereo(const World &w,float x,int offset)
+{
+
+}
+
+void Camera::compute_uvw()
+{
+	w = eye - lookat;
+	w.normalize();
+	u = up ^ w;
+	u.normalize();
+	v = w ^ u;
+
+	//奇异情况没有判断处理
+	if (eye.x == lookat.x && eye.z == lookat.z && eye.y > lookat.y) { // camera looking vertically down
+		u = Vector3D(0, 0, 1);
+		v = Vector3D(1, 0, 0);
+		w = Vector3D(0, 1, 0);	
+	}
+	
+	if (eye.x == lookat.x && eye.z == lookat.z && eye.y < lookat.y) { // camera looking vertically up
+		u = Vector3D(1, 0, 0);
+		v = Vector3D(0, 0, 1);
+		w = Vector3D(0, -1, 0);
+	}
+}

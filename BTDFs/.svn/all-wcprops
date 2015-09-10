@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 37
+/svn/!svn/ver/14/trunk/Rytracer/BTDFs
+END
+BTDF.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/13/trunk/Rytracer/BTDFs/BTDF.cpp
+END
+FresnelTransmitter.h
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/14/trunk/Rytracer/BTDFs/FresnelTransmitter.h
+END
+BTDF.h
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/13/trunk/Rytracer/BTDFs/BTDF.h
+END
+PerfectTransmitter.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/13/trunk/Rytracer/BTDFs/PerfectTransmitter.cpp
+END
+PerfectTransmitter.h
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/13/trunk/Rytracer/BTDFs/PerfectTransmitter.h
+END
+FresnelTransmitter.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/14/trunk/Rytracer/BTDFs/FresnelTransmitter.cpp
+END

@@ -1,0 +1,125 @@
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/16/trunk/Rytracer/Materials
+END
+Material.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/13/trunk/Rytracer/Materials/Material.cpp
+END
+SV_Emissive.h
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/16/trunk/Rytracer/Materials/SV_Emissive.h
+END
+Transparent.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/14/trunk/Rytracer/Materials/Transparent.cpp
+END
+Material.h
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/16/trunk/Rytracer/Materials/Material.h
+END
+Transparent.h
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/13/trunk/Rytracer/Materials/Transparent.h
+END
+Dielectric.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/14/trunk/Rytracer/Materials/Dielectric.cpp
+END
+Matte.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/16/trunk/Rytracer/Materials/Matte.cpp
+END
+Phong.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/14/trunk/Rytracer/Materials/Phong.cpp
+END
+Dielectric.h
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/14/trunk/Rytracer/Materials/Dielectric.h
+END
+Matte.h
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/13/trunk/Rytracer/Materials/Matte.h
+END
+Phong.h
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/14/trunk/Rytracer/Materials/Phong.h
+END
+SV_Matte.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/15/trunk/Rytracer/Materials/SV_Matte.cpp
+END
+Emissive.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/13/trunk/Rytracer/Materials/Emissive.cpp
+END
+GlossyReflector.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/13/trunk/Rytracer/Materials/GlossyReflector.cpp
+END
+SV_Matte.h
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/15/trunk/Rytracer/Materials/SV_Matte.h
+END
+Reflective.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/16/trunk/Rytracer/Materials/Reflective.cpp
+END
+Emissive.h
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/13/trunk/Rytracer/Materials/Emissive.h
+END
+GlossyReflector.h
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/13/trunk/Rytracer/Materials/GlossyReflector.h
+END
+SV_Emissive.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/16/trunk/Rytracer/Materials/SV_Emissive.cpp
+END
+Reflective.h
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/16/trunk/Rytracer/Materials/Reflective.h
+END

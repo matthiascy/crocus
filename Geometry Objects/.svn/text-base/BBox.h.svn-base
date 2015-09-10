@@ -1,0 +1,19 @@
+#pragma once
+
+#include "Ray.h"
+
+class BBox
+{
+public:
+	BBox();
+	BBox(double _x0,double _y0,double _z0,double _x1,double _y1,double _z1);
+	~BBox();
+
+	bool hit(const Ray& ray)const;
+
+	bool inside(const Point3D& p)const;
+
+public:
+	double x0,y0,z0,x1,y1,z1;
+	static const double kEpsilon;
+};

@@ -1,0 +1,149 @@
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/15/trunk/Rytracer/Utilities
+END
+Vector3D.h
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/10/trunk/Rytracer/Utilities/Vector3D.h
+END
+Ray.h
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/2/trunk/Rytracer/Utilities/Ray.h
+END
+ply.c
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/12/trunk/Rytracer/Utilities/ply.c
+END
+Matrix.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/10/trunk/Rytracer/Utilities/Matrix.cpp
+END
+ply.h
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/12/trunk/Rytracer/Utilities/ply.h
+END
+Matrix.h
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/10/trunk/Rytracer/Utilities/Matrix.h
+END
+RGBColor.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/14/trunk/Rytracer/Utilities/RGBColor.cpp
+END
+RGBColor.h
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/14/trunk/Rytracer/Utilities/RGBColor.h
+END
+ShadeRec.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/15/trunk/Rytracer/Utilities/ShadeRec.cpp
+END
+Point2D.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/2/trunk/Rytracer/Utilities/Point2D.cpp
+END
+Point3D.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/10/trunk/Rytracer/Utilities/Point3D.cpp
+END
+maths.h
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/11/trunk/Rytracer/Utilities/maths.h
+END
+constants.h
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/15/trunk/Rytracer/Utilities/constants.h
+END
+Image.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/15/trunk/Rytracer/Utilities/Image.cpp
+END
+ShadeRec.h
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/15/trunk/Rytracer/Utilities/ShadeRec.h
+END
+Point2D.h
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/5/trunk/Rytracer/Utilities/Point2D.h
+END
+Point3D.h
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/10/trunk/Rytracer/Utilities/Point3D.h
+END
+rply.c
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/12/trunk/Rytracer/Utilities/rply.c
+END
+Image.h
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/15/trunk/Rytracer/Utilities/Image.h
+END
+Normal.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/10/trunk/Rytracer/Utilities/Normal.cpp
+END
+Vector3D.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/10/trunk/Rytracer/Utilities/Vector3D.cpp
+END
+Ray.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/2/trunk/Rytracer/Utilities/Ray.cpp
+END
+rply.h
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/12/trunk/Rytracer/Utilities/rply.h
+END
+Normal.h
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/12/trunk/Rytracer/Utilities/Normal.h
+END

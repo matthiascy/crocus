@@ -1,0 +1,31 @@
+#pragma once
+
+
+#include "RGBColor.h"
+#include "ShadeRec.h"
+#include "Sampler.h"
+
+
+/*
+使用材质的原因是因为在没一点的光照还是使用的局部模型(如PHONG),整个世界空间会存在环境光，和其他光源。因此对一种材质需包含多个
+BRDF来分别描述反射的情况，最终结果是将这些反射结果相加。
+*/
+class Material
+{
+public:
+	Material();
+	~Material();
+
+
+	virtual void set_sampler(Sampler* s);
+
+	virtual RGBColor get_Le(const ShadeRec& sr)const;
+	
+	virtual RGBColor shade(ShadeRec& sr)const;
+
+	virtual RGBColor area_light_shade(ShadeRec& sr)const;
+
+	virtual RGBColor path_shade(ShadeRec& sr)const;
+
+	virtual RGBColor global_shade(ShadeRec&	sr)const;
+};

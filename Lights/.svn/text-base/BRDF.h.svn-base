@@ -1,0 +1,32 @@
+#pragma once
+
+
+#include "RGBColor.h"
+#include "ShadeRec.h"
+#include "Vector3D.h"
+#include "Sampler.h"
+
+class BRDF
+{
+public:
+	BRDF();
+	virtual ~BRDF();
+
+	void set_sampler(Sampler* sPtr);
+
+
+	//因为有三个通道 所以使用RGBColor 但是要注意这里的RGBColor只是反射系数，不是颜色。	
+	virtual RGBColor f(const ShadeRec& sr,const Vector3D& wo,const Vector3D& wi)const = 0;
+
+	virtual RGBColor sample_f(const ShadeRec& sr, const Vector3D& wo,Vector3D& wi)const = 0; //wi的常量性在PerfectSpecular中被打破
+
+	virtual RGBColor sample_f(const ShadeRec& sr, const Vector3D& wo, Vector3D& wi, float& pdf) const = 0;
+
+	virtual RGBColor rho(const ShadeRec& sr, const Vector3D& wo)const = 0;
+
+
+
+
+protected:
+	Sampler* sampler_ptr;
+};

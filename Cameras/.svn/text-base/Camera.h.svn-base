@@ -1,0 +1,57 @@
+#pragma once
+
+
+#include "Vector3D.h"
+#include "Point3D.h"
+
+
+
+class World;
+//class Point3D;
+//class Vector3D;
+
+class Camera{
+public:
+	Camera(void);
+	virtual ~Camera(void);
+
+	virtual void render_scene(const World& world)=0;
+
+	virtual void render_stereo(const World& w, float x, int offset);
+
+	void set_eye(double _x, double _y, double _z);
+
+	void set_eye(const Point3D& p);
+
+	void set_lookat(double _x, double _y, double _z);
+
+	void set_lookat(const Point3D& p);
+
+	void compute_uvw();
+
+protected:
+	Point3D		eye;
+	Point3D		lookat;
+	Vector3D	u,v,w;
+	Vector3D	up;
+};
+
+inline void Camera::set_eye(double _x, double _y, double _z)
+{
+	eye = Point3D(_x,_y,_z);
+}
+
+inline void Camera::set_eye(const Point3D& p)
+{
+	eye = p;
+}
+
+inline void Camera::set_lookat(double _x, double _y, double _z)
+{
+	lookat = Point3D(_x,_y,_z);
+}
+
+inline void Camera::set_lookat(const Point3D& p)
+{
+	lookat = p;
+}

@@ -1,0 +1,77 @@
+#ifndef __DIRECTIONAL__
+#define __DIRECTIONAL__
+
+
+// 	Copyright (C) Kevin Suffern 2000-2007.
+//	This C++ code is for non-commercial purposes only.
+//	This C++ code is licensed under the GNU General Public License Version 2.
+//	See the file COPYING.txt for the full license.
+
+
+#include "Light.h"
+#include "Vector3D.h"
+#include "RGBColor.h"
+
+		// you will need this later on for shadows
+#include "ShadeRec.h"
+
+
+class Directional: public Light {
+	public:
+	
+		Directional(void);   							
+
+		Directional(const Directional& dl); 
+		
+		
+
+		Directional& 									
+		operator= (const Directional& rhs); 
+			
+		virtual											
+		~Directional(void); 
+				
+		
+			
+		void
+		set_direction(Vector3D d);						
+		
+		void
+		set_direction(float dx, float dy, float dz);
+		
+		virtual Vector3D	get_direction(const ShadeRec& sr);
+				
+		virtual RGBColor	L(const ShadeRec& sr);
+
+		virtual bool in_shadow(const Ray& ray,const ShadeRec& sr)const;
+		
+	private:
+		Vector3D	dir;		// direction the light comes from
+};
+
+
+// inlined access functions
+
+
+
+
+// ---------------------------------------------------------------------- set_direction
+
+inline void
+Directional::set_direction(Vector3D d) {
+	dir = d;
+	dir.normalize();
+}
+
+
+// ---------------------------------------------------------------------- set_direction 
+
+inline void
+Directional::set_direction(float dx, float dy, float dz) {
+	dir.x = dx; dir.y = dy; dir.z = dz;
+	dir.normalize();
+}
+
+
+#endif
+
