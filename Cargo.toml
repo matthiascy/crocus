@@ -2,5 +2,7 @@
 
 members = [
     "ion",
+    "anion",
+    "cation",
     "crocus",
 ]
